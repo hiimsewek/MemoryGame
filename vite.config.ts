@@ -29,4 +29,11 @@ export default defineConfig({
       utils: "/src/utils",
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
 });
