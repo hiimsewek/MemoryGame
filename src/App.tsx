@@ -1,10 +1,11 @@
-import { Header } from "components";
+import { GameScreen, Header } from "components";
 import "styles/globalStyles.scss";
 
 const App = () => {
   return (
     <>
       <Header />
+      <GameScreen />
     </>
   );
 };
