@@ -1,0 +1,47 @@
+@import "styles/variables.scss";
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: $greyPurple;
+  z-index: 100;
+  transform: translateX(100%);
+  width: 90%;
+  height: 100vh;
+  max-width: 400px;
+  transition: 0.3s ease-in-out;
+  padding: 10px;
+
+  &[data-active="true"] {
+    transform: translateX(0);
+  }
+
+  .closeBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 100px;
+  }
+
+  .closeBtn {
+    font-size: 1.8rem;
+
+    @media (min-width: 1024px) {
+      font-size: 2.2rem;
+    }
+
+    @media (min-width: 1440px) {
+      font-size: 2.6rem;
+    }
+  }
+}
