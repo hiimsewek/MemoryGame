@@ -1,8 +1,8 @@
 {
   "name": "Memory Game",
   "start_url": "/",
-  "theme_color": "#2E0E73",
-  "background_color": "#2E0E73",
+  "theme_color": "#262626",
+  "background_color": "#262626",
   "scope": "/",
   "display": "standalone",
   "icons": [
