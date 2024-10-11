@@ -6,12 +6,17 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Poppins, sans-serif;
-  font-size: 50px;
-  color: $grey100;
-  width: 100vw;
-  min-height: 100vh;
-  background-image: linear-gradient(135deg, $grey700, $grey900);
-  background: -moz-repeating-linear-gradient($grey700, $grey700);
+html {
+  font-size: 10px;
+
+  body {
+    font-family: Poppins, sans-serif;
+    padding: 10px;
+    width: 100vw;
+    min-height: 100vh;
+    color: $grey100;
+    background-image: linear-gradient(135deg, $grey700, $grey900);
+    background: -moz-repeating-linear-gradient($grey700, $grey700);
+    overflow-x: hidden;
+  }
 }
