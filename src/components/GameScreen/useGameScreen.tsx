@@ -1,12 +1,19 @@
 import { cards } from "data/cards";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useGameStore } from "store";
 import { CardWithId } from "types";
 import { generateCardPairs, shuffleDeck } from "utils/deckUtils";
 
 const useGameScreen = () => {
-  const { difficulty, category, revealTile, revealedTiles, matchedPairs } =
-    useGameStore();
+  const {
+    addMatchedPair,
+    clearRevealedTiles,
+    difficulty,
+    category,
+    revealTile,
+    revealedTiles,
+    matchedPairs,
+  } = useGameStore();
 
   const deck = useMemo(
     () => cards.filter((el) => el.type === category),
@@ -24,6 +31,8 @@ const useGameScreen = () => {
   const shuffledDeck = useMemo(() => shuffleDeck(tailoredDeck), [tailoredDeck]);
 
   const onItemClick = (id: string) => {
+    if (revealedTiles.length == 2) return;
+
     revealTile(id);
   };
 
@@ -33,6 +42,20 @@ const useGameScreen = () => {
 
     return itemRevealed || itemMatched;
   };
+
+  useEffect(() => {
+    if (revealedTiles.length === 2) {
+      const [firstCard, secondCard] = shuffledDeck.filter((el) =>
+        revealedTiles.includes(el.id)
+      );
+
+      if (firstCard.value === secondCard.value) addMatchedPair(firstCard.value);
+
+      setTimeout(() => {
+        clearRevealedTiles();
+      }, 1000);
+    }
+  }, [revealedTiles, addMatchedPair, clearRevealedTiles, shuffledDeck]);
 
   return {
     difficulty,
