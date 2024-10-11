@@ -1,0 +1,12 @@
+.board {
+  margin: 100px 0;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  gap: 20px;
+
+  &[data-difficulty="hard"] {
+    grid-template-columns: repeat(6, auto);
+  }
+}
