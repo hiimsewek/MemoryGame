@@ -1,4 +1,4 @@
-import { Tile } from "components/Tile";
+import { Tile } from "components";
 import styles from "./Board.module.scss";
 import { CardWithId, Difficulty } from "types";
 

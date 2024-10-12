@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { IconButton, Drawer } from "components";
 import { faGear, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Header.module.scss";
-import { Drawer } from "components/Drawer";
-import { IconButton } from "components/IconButton";
 
 type HeaderOptions = "history" | "settings" | null;
 

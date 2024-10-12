@@ -1,4 +1,4 @@
-import { IconButton } from "components/IconButton";
+import { IconButton } from "components";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Drawer.module.scss";
 
