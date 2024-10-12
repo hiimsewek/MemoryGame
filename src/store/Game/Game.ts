@@ -30,8 +30,7 @@ const useGameStore = create<State & Action>((set) => ({
 
   updateTimer: () => set((state) => ({ timer: state.timer + 1 })),
 
-  startNewGame: () =>
-    set({ ...initialState, attempts: 1, startDate: new Date() }),
+  startNewGame: () => set({ ...initialState, startDate: new Date() }),
 
   addGameToHistory: (game) =>
     set((state) => ({ gameHistory: [game, ...state.gameHistory] })),
