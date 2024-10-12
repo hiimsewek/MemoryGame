@@ -36,3 +36,11 @@ export const shuffleDeck = (deck: CardWithId[]) => {
 
   return data;
 };
+
+export const unpackCategories = (deck: Card[]) => {
+  const data = deck.map((el) => el.type);
+
+  const uniqueCategories = new Set([...data]);
+
+  return [...uniqueCategories];
+};
