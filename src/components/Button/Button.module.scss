@@ -1,0 +1,21 @@
+@import "styles/variables.scss";
+
+.button {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  text-transform: uppercase;
+  color: $grey100;
+  background: linear-gradient(135deg, $bluePurple, $darkPurple);
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    filter: grayscale(0.5);
+    transition: 0.3s linear;
+  }
+}
