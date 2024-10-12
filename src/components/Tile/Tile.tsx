@@ -4,9 +4,10 @@ import styles from "./Tile.module.scss";
 type TileProps = Omit<CardWithId, "type"> & {
   onClick: (id: string) => void;
   active: boolean;
+  disabled: boolean;
 };
 
-const Tile = ({ id, image, value, onClick, active }: TileProps) => {
+const Tile = ({ id, image, value, onClick, active, disabled }: TileProps) => {
   return (
     <>
       <div className={styles.tile}>
@@ -20,6 +21,7 @@ const Tile = ({ id, image, value, onClick, active }: TileProps) => {
           className={styles.back}
           onClick={onClick.bind(this, id)}
           data-active={active}
+          data-disabled={disabled}
         ></div>
       </div>
     </>

@@ -26,8 +26,12 @@
   .back {
     background: linear-gradient(135deg, $bluePurple, $darkPurple);
     -webkit-tap-highlight-color: transparent;
-
     cursor: pointer;
+
+    &[data-disabled="true"] {
+      cursor: context-menu;
+      filter: grayscale(0.5);
+    }
 
     &[data-active="false"] {
       z-index: 2;

@@ -5,15 +5,22 @@ import { CardWithId, Difficulty } from "types";
 type BoardProps = {
   difficulty: Difficulty;
   deck: CardWithId[];
+  boardDisabled: boolean;
   onItemClick: (id: string) => void;
-  isActive: ({ id, value }: Pick<CardWithId, "id" | "value">) => boolean;
+  isItemActive: ({ id, value }: Pick<CardWithId, "id" | "value">) => boolean;
 };
 
-const Board = ({ isActive, deck, difficulty, onItemClick }: BoardProps) => {
+const Board = ({
+  isItemActive,
+  deck,
+  difficulty,
+  onItemClick,
+  boardDisabled,
+}: BoardProps) => {
   return (
     <div className={styles.board} data-difficulty={difficulty}>
       {deck.map(({ id, value, image }: CardWithId) => {
-        const itemActive = isActive({ id, value });
+        const itemActive = isItemActive({ id, value });
 
         return (
           <Tile
@@ -23,6 +30,7 @@ const Board = ({ isActive, deck, difficulty, onItemClick }: BoardProps) => {
             value={value}
             onClick={onItemClick}
             active={itemActive}
+            disabled={boardDisabled}
           />
         );
       })}

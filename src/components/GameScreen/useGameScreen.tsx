@@ -14,6 +14,7 @@ const useGameScreen = () => {
     revealTile,
     revealedTiles,
     matchedPairs,
+    startDate,
     timer,
     updateTimer,
   } = useGameStore();
@@ -32,12 +33,14 @@ const useGameScreen = () => {
 
   const tailoredDeck = useMemo(
     () => generateCardPairs(deck, pairsNumber),
-    [deck, numOfTiles]
+    [deck, pairsNumber]
   );
 
   const shuffledDeck = useMemo(() => shuffleDeck(tailoredDeck), [tailoredDeck]);
 
   const onItemClick = (id: string) => {
+    if (!startDate) return;
+
     const shouldIncreaseAttempts = revealedTiles.length === 0 && !attemptsFroze;
 
     if (shouldIncreaseAttempts) increaseAttempts();
@@ -55,11 +58,14 @@ const useGameScreen = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (matchedPairs.length !== pairsNumber) updateTimer();
+      const shouldUpdateTimer =
+        startDate && matchedPairs.length !== pairsNumber;
+
+      if (shouldUpdateTimer) updateTimer();
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timer]);
+  }, [timer, startDate, matchedPairs, pairsNumber, updateTimer]);
 
   useEffect(() => {
     if (revealedTiles.length === 2) {
@@ -67,26 +73,35 @@ const useGameScreen = () => {
         revealedTiles.includes(el.id)
       );
 
+      let timeout = undefined;
+
       if (firstCard.value === secondCard.value) {
         addMatchedPair(firstCard.value);
         setAttemptsFroze(true);
+        clearRevealedTiles();
       } else {
         setAttemptsFroze(false);
-      }
 
-      const timeout = setTimeout(() => {
-        clearRevealedTiles();
-      }, 1000);
+        timeout = setTimeout(() => {
+          clearRevealedTiles();
+        }, 1000);
+      }
 
       return () => clearTimeout(timeout);
     }
   }, [revealedTiles, addMatchedPair, clearRevealedTiles, shuffledDeck]);
+
+  const gameFinished = useMemo(
+    () => matchedPairs.length === pairsNumber,
+    [matchedPairs, pairsNumber]
+  );
 
   return {
     difficulty,
     onItemClick,
     isActive,
     shuffledDeck,
+    gameFinished,
   };
 };
 
