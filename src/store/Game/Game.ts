@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Action, State } from "./Game.types";
-import { loadCategory, loadDifficulty } from "utils/settingsLoader";
+import { loadCategory, loadDifficulty } from "utils/storage";
 
 const initialState: State = {
   attempts: 0,
