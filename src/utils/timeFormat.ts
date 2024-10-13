@@ -11,3 +11,11 @@ export const secondsToTime = (totalSeconds: number) => {
 
   return timeFormatted;
 };
+
+export const getDateWithTime = (fullDate: Date) => {
+  const d = new Date(fullDate);
+  const date = d.toLocaleDateString();
+  const time = d.toLocaleTimeString().substring(0, 5);
+
+  return `${date} ${time}`;
+};
