@@ -1,11 +1,13 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { cards } from "data/cards";
-import { useEffect, useMemo, useState } from "react";
 import { useGameStore } from "store";
 import { CardWithId } from "types";
 import { generateCardPairs, shuffleDeck } from "utils/deckUtils";
+import { addHistoryItem } from "utils/storage";
 
 const useGameScreen = () => {
   const {
+    attempts,
     addMatchedPair,
     category,
     clearRevealedTiles,
@@ -95,6 +97,23 @@ const useGameScreen = () => {
     () => matchedPairs.length === pairsNumber,
     [matchedPairs, pairsNumber]
   );
+
+  const gameFinishHandler = useCallback(() => {
+    const historyItem = {
+      date: startDate!,
+      time: timer,
+      attempts,
+      difficulty,
+    };
+
+    addHistoryItem(historyItem);
+  }, [difficulty, timer, startDate, attempts]);
+
+  useEffect(() => {
+    if (gameFinished) {
+      gameFinishHandler();
+    }
+  }, [gameFinishHandler, gameFinished]);
 
   return {
     difficulty,

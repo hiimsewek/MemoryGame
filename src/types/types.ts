@@ -18,3 +18,10 @@ export type GameInfo = {
   date: Date;
   difficulty: Difficulty;
 }[];
+
+export type HistoryItem = {
+  time: number;
+  date: Date;
+  attempts: number;
+  difficulty: Difficulty;
+};

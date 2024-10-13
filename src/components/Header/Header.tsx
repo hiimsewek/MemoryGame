@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconButton, Drawer } from "components";
+import { IconButton, Drawer, GameHistory, SettingsForm } from "components";
 import { faGear, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Header.module.scss";
 
@@ -34,7 +34,10 @@ const Header = () => {
       </header>
 
       <Drawer onClose={onClose} isActive={!!option}>
-        <></>
+        <>
+          {option === "settings" && <SettingsForm />}
+          {option === "history" && <GameHistory />}
+        </>
       </Drawer>
     </>
   );
