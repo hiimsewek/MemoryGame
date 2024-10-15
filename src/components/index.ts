@@ -6,5 +6,6 @@ export { GameScreen } from "./GameScreen";
 export { GameStats } from "./GameStats";
 export { Header } from "./Header";
 export { IconButton } from "./IconButton";
+export { Modal } from "./Modal";
 export { Overlay } from "./Overlay";
 export { Tile } from "./Tile";
