@@ -1,4 +1,5 @@
 @import "styles/variables.scss";
+@import "styles/mixins.scss";
 
 .drawer {
   position: fixed;
@@ -27,11 +28,11 @@
   .closeBtn {
     font-size: 1.8rem;
 
-    @media (min-width: 1024px) {
+    @include breakpoint("lg") {
       font-size: 2.2rem;
     }
 
-    @media (min-width: 1440px) {
+    @include breakpoint("xl") {
       font-size: 2.6rem;
     }
   }

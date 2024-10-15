@@ -1,8 +1,9 @@
 @import "styles/variables.scss";
+@import "styles/mixins.scss";
 
 .radioGroupOuterContainer {
   width: 100%;
-  margin: 10px 0;
+  margin: 20px 0;
 
   .radioGroupInnerContainer {
     display: flex;
@@ -17,11 +18,11 @@
       font-size: 1rem;
       text-transform: capitalize;
 
-      @media (min-width: 1024px) {
+      @include breakpoint("lg") {
         font-size: 1.2rem;
       }
 
-      @media (min-width: 1440px) {
+      @include breakpoint("xl") {
         font-size: 1.4rem;
       }
 

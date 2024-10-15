@@ -1,8 +1,9 @@
 @import "styles/variables.scss";
+@import "styles/mixins.scss";
 
 .selectOuterContainer {
   width: 100%;
-  margin: 10px 0;
+  margin: 20px 0;
   user-select: none;
 
   .selectInnerContainer {
@@ -40,11 +41,11 @@
     .selectIcon {
       font-size: 1rem;
 
-      @media (min-width: 1024px) {
+      @include breakpoint("lg") {
         font-size: 1.2rem;
       }
 
-      @media (min-width: 1440px) {
+      @include breakpoint("xl") {
         font-size: 1.4rem;
       }
     }
@@ -76,11 +77,11 @@
         font-size: 1rem;
         cursor: pointer;
 
-        @media (min-width: 1024px) {
+        @include breakpoint("lg") {
           font-size: 1.2rem;
         }
 
-        @media (min-width: 1440px) {
+        @include breakpoint("xl") {
           font-size: 1.4rem;
         }
       }

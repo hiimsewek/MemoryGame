@@ -1,3 +1,5 @@
+@import "styles/mixins.scss";
+
 .board {
   display: grid;
   width: 100%;
@@ -5,7 +7,9 @@
   justify-content: center;
   gap: 20px;
 
-  &[data-difficulty="hard"] {
-    grid-template-columns: repeat(6, auto);
+  @include breakpoint("lg") {
+    &[data-difficulty="hard"] {
+      grid-template-columns: repeat(6, auto);
+    }
   }
 }
