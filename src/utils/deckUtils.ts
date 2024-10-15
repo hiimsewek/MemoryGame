@@ -37,6 +37,13 @@ export const shuffleDeck = (deck: CardWithId[]) => {
   return data;
 };
 
+export const prepareCardSet = (deck: Card[], pairsNumber: number) => {
+  const tailoredDeck = generateCardPairs(deck, pairsNumber);
+  const shuffledDeck = shuffleDeck(tailoredDeck);
+
+  return shuffledDeck;
+};
+
 export const unpackCategories = (deck: Card[]) => {
   const data = deck.map((el) => el.type);
 
