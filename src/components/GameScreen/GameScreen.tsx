@@ -1,6 +1,5 @@
-import { Board, GameStats } from "components";
+import { Board, GameStats, Button } from "components";
 import { useGameStore } from "store";
-import { Button } from "components/Button";
 import useGameScreen from "./useGameScreen";
 import styles from "./GameScreen.module.scss";
 

@@ -1,15 +1,17 @@
-export { Board } from "./Board";
-export { Button } from "./Button";
-export { Drawer } from "./Drawer";
 export { GameHistory } from "./GameHistory";
 export { GameScreen } from "./GameScreen";
 export { GameStats } from "./GameStats";
 export { Header } from "./Header";
-export { IconButton } from "./IconButton";
-export { Label } from "./Label";
-export { Modal } from "./Modal";
-export { Overlay } from "./Overlay";
-export { RadioGroup } from "./RadioGroup";
-export { Select } from "./Select";
 export { SettingsForm } from "./SettingsForm";
-export { Tile } from "./Tile";
+export {
+  Board,
+  Button,
+  Drawer,
+  IconButton,
+  Label,
+  Modal,
+  Overlay,
+  RadioGroup,
+  Select,
+  Tile,
+} from "./UI";

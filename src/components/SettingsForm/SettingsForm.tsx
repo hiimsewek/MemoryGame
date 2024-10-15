@@ -20,6 +20,7 @@ const SettingsForm = () => {
   return (
     <>
       <div className={styles.formContainer}>
+        <div className={styles.title}>Settings</div>
         <Select
           label="category"
           options={categories}
@@ -34,9 +35,11 @@ const SettingsForm = () => {
           onChange={onDifficultyChange}
         />
 
-        <Button onClick={submitHandler} disabled={btnDisabled}>
-          save
-        </Button>
+        <div className={styles.btnContainer}>
+          <Button onClick={submitHandler} disabled={btnDisabled}>
+            save
+          </Button>
+        </div>
       </div>
       {modalActive && (
         <Modal
