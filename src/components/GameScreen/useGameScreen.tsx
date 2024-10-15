@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { cards } from "data/cards";
 import { useGameStore } from "store";
 import { CardWithId } from "types";
-import { generateCardPairs, shuffleDeck } from "utils/deckUtils";
+import { prepareCardSet } from "utils/deckUtils";
 
 const useGameScreen = () => {
   const {
@@ -11,11 +11,13 @@ const useGameScreen = () => {
     addMatchedPair,
     category,
     clearRevealedTiles,
+    deck,
     difficulty,
     increaseAttempts,
     revealTile,
     revealedTiles,
     matchedPairs,
+    setDeck,
     startDate,
     timer,
     updateTimer,
@@ -23,7 +25,7 @@ const useGameScreen = () => {
 
   const [attemptsFroze, setAttemptsFroze] = useState(false);
 
-  const deck = useMemo(
+  const categoryCardList = useMemo(
     () => cards.filter((el) => el.type === category),
     [category]
   );
@@ -32,13 +34,6 @@ const useGameScreen = () => {
     difficulty === "easy" ? 8 : difficulty === "medium" ? 16 : 24;
 
   const pairsNumber = numOfTiles / 2;
-
-  const tailoredDeck = useMemo(
-    () => generateCardPairs(deck, pairsNumber),
-    [deck, pairsNumber]
-  );
-
-  const shuffledDeck = useMemo(() => shuffleDeck(tailoredDeck), [tailoredDeck]);
 
   const onItemClick = (id: string) => {
     if (!startDate) return;
@@ -58,6 +53,15 @@ const useGameScreen = () => {
     return itemRevealed || itemMatched;
   };
 
+  // prepare new card set every game
+  useEffect(() => {
+    if (attempts === 0) {
+      const preparedCardSet = prepareCardSet(categoryCardList, pairsNumber);
+      setDeck(preparedCardSet);
+    }
+  }, [attempts, categoryCardList, pairsNumber, setDeck]);
+
+  // update timer
   useEffect(() => {
     const interval = setInterval(() => {
       const shouldUpdateTimer =
@@ -69,9 +73,10 @@ const useGameScreen = () => {
     return () => clearInterval(interval);
   }, [timer, startDate, matchedPairs, pairsNumber, updateTimer]);
 
+  // pair matching functionality
   useEffect(() => {
     if (revealedTiles.length === 2) {
-      const [firstCard, secondCard] = shuffledDeck.filter((el) =>
+      const [firstCard, secondCard] = deck.filter((el) =>
         revealedTiles.includes(el.id)
       );
 
@@ -91,7 +96,7 @@ const useGameScreen = () => {
 
       return () => clearTimeout(timeout);
     }
-  }, [revealedTiles, addMatchedPair, clearRevealedTiles, shuffledDeck]);
+  }, [revealedTiles, addMatchedPair, clearRevealedTiles, deck]);
 
   const gameFinished = useMemo(
     () => matchedPairs.length === pairsNumber,
@@ -116,10 +121,8 @@ const useGameScreen = () => {
   }, [gameFinishHandler, gameFinished]);
 
   return {
-    difficulty,
     onItemClick,
     isActive,
-    shuffledDeck,
     gameFinished,
   };
 };

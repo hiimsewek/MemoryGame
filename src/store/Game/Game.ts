@@ -14,6 +14,7 @@ const initialState: State = {
   matchedPairs: [],
   timer: 0,
   startDate: null,
+  deck: [],
   gameHistory: getHistory(),
   difficulty: loadDifficulty(),
   category: loadCategory(),
@@ -24,7 +25,7 @@ const useGameStore = create<State & Action>((set) => ({
 
   increaseAttempts: () => set((state) => ({ attempts: state.attempts + 1 })),
 
-  revealTile: (id: string) =>
+  revealTile: (id) =>
     set((state) => ({ revealedTiles: [...state.revealedTiles, id] })),
 
   clearRevealedTiles: () => set({ revealedTiles: [] }),
@@ -35,6 +36,8 @@ const useGameStore = create<State & Action>((set) => ({
     })),
 
   updateTimer: () => set((state) => ({ timer: state.timer + 1 })),
+
+  setDeck: (deck) => set({ deck }),
 
   startNewGame: () =>
     set({

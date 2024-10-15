@@ -1,13 +1,12 @@
 import { Board, GameStats } from "components";
+import { useGameStore } from "store";
+import { Button } from "components/Button";
 import useGameScreen from "./useGameScreen";
 import styles from "./GameScreen.module.scss";
-import { Button } from "components/Button";
-import { useGameStore } from "store";
 
 const GameScreen = () => {
-  const { difficulty, isActive, onItemClick, shuffledDeck, gameFinished } =
-    useGameScreen();
-  const { startDate, startNewGame } = useGameStore();
+  const { isActive, onItemClick, gameFinished } = useGameScreen();
+  const { difficulty, deck, startDate, startNewGame } = useGameStore();
 
   const btnText = gameFinished ? "play again" : "play";
   const btnVisible = !startDate || gameFinished;
@@ -17,7 +16,7 @@ const GameScreen = () => {
       <div className={styles.gameScreenContainer}>
         <GameStats />
         <Board
-          deck={shuffledDeck}
+          deck={deck}
           difficulty={difficulty}
           boardDisabled={!startDate}
           isItemActive={isActive}
