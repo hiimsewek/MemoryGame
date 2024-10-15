@@ -1,4 +1,4 @@
-import { IconButton } from "components";
+import { IconButton, Overlay } from "components";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Drawer.module.scss";
 
@@ -11,7 +11,7 @@ type DrawerProps = {
 const Drawer = ({ isActive, onClose, children }: DrawerProps) => {
   return (
     <>
-      {isActive && <div onClick={onClose} className={styles.overlay}></div>}
+      {isActive && <Overlay onClick={onClose}></Overlay>}
       <div data-active={isActive} className={styles.drawer}>
         <>
           <div className={styles.closeBtnContainer}>
