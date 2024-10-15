@@ -13,15 +13,8 @@ export type CardWithId = Card & {
 export type Difficulty = "easy" | "medium" | "hard";
 
 export type GameInfo = {
-  attempts: string;
+  attempts: number;
   duration: number;
   date: Date;
-  difficulty: Difficulty;
-}[];
-
-export type HistoryItem = {
-  time: number;
-  date: Date;
-  attempts: number;
   difficulty: Difficulty;
 };

@@ -3,10 +3,10 @@ import { cards } from "data/cards";
 import { useGameStore } from "store";
 import { CardWithId } from "types";
 import { generateCardPairs, shuffleDeck } from "utils/deckUtils";
-import { addHistoryItem } from "utils/storage";
 
 const useGameScreen = () => {
   const {
+    addGameToHistory,
     attempts,
     addMatchedPair,
     category,
@@ -101,13 +101,13 @@ const useGameScreen = () => {
   const gameFinishHandler = useCallback(() => {
     const historyItem = {
       date: startDate!,
-      time: timer,
+      duration: timer,
       attempts,
       difficulty,
     };
 
-    addHistoryItem(historyItem);
-  }, [difficulty, timer, startDate, attempts]);
+    addGameToHistory(historyItem);
+  }, [difficulty, timer, startDate, attempts, addGameToHistory]);
 
   useEffect(() => {
     if (gameFinished) {

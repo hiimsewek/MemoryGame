@@ -1,29 +1,30 @@
-import { getItem } from "utils/storage";
 import { getDateWithTime, secondsToTime } from "utils/timeFormat";
+import { useGameStore } from "store";
 import styles from "./GameHistory.module.scss";
-import { HistoryItem } from "types";
 
 const GameHistory = () => {
-  const historyItem = getItem("history") as HistoryItem[] | null;
+  const { gameHistory } = useGameStore();
+
+  const showHistory = gameHistory.length > 0;
 
   return (
     <div>
       <div className={styles.title}>Game History</div>
-      {historyItem ? (
+      {showHistory ? (
         <table className={styles.historyTable}>
           <thead>
             <tr>
               <th>Date</th>
-              <th>Time</th>
+              <th>Duration</th>
               <th>Attempts</th>
               <th>Difficulty</th>
             </tr>
           </thead>
           <tbody>
-            {historyItem.map((el, i) => (
+            {gameHistory.map((el, i) => (
               <tr key={i}>
                 <td>{getDateWithTime(el.date)}</td>
-                <td>{secondsToTime(el.time)}</td>
+                <td>{secondsToTime(el.duration)}</td>
                 <td>{el.attempts}</td>
                 <td>{el.difficulty}</td>
               </tr>
